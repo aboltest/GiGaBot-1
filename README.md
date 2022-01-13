@@ -32,7 +32,7 @@ target = "GUID"
 
 و بعد با این دستورات ، اسکریپت رو ران کنید
 
-```python3
+```python
 pip install -r requirments.txt
 python bot.py
 ```
