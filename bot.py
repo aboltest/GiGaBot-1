@@ -134,7 +134,7 @@ while True:
 							except:
 								bot.sendMessage(target, "❌ لطفا دستور را به درستی وارد کنید", message_id=msg.get("message_id"))
 
-						elif msg.get("text").startswith("حالت آرام") and msg.get("author_object_guid") in admins:
+						elif msg.get("text") == "حالت آرام" and msg.get("author_object_guid") in admins:
 							try:
 								number = 10
 								bot.setGroupTimer(target,number)
@@ -144,7 +144,7 @@ while True:
 							except:
 								bot.sendMessage(target, "❌ لطفا دستور را به درستی وارد کنید", message_id=msg.get("message_id"))
 							
-						elif msg.get("text").startswith("برداشتن حالت آرام") and msg.get("author_object_guid") in admins:
+						elif msg.get("text") == "برداشتن حالت آرام" and msg.get("author_object_guid") in admins:
 							try:
 								number = 0
 								bot.setGroupTimer(target,number)
@@ -213,7 +213,7 @@ while True:
 						bot.sendMessage(target, f"سلام {user} عزیز 🌹 \n• به گروه {name} خوش اومدی 😍 \n 📿 لطفا قوانین رو رعایت کن .\n 💎 برای مشاهده قوانین کافیه کلمه (قوانین) رو ارسال کنی .", message_id=msg["message_id"])
 						# bot.deleteMessages(target, [msg["message_id"]])
 				else:
-					if "forwarded_from" in msg.keys() and bot.getMessagesInfo(target, [msg.get("message_id")])[0]["forwarded_from"]["type_from"] == "Channel" and msg.get("author_object_guid") in admins :
+					if "forwarded_from" in msg.keys() and bot.getMessagesInfo(target, [msg.get("message_id")])[0]["forwarded_from"]["type_from"] == "Channel" and not msg.get("author_object_guid") in admins :
 						bot.deleteMessages(target, [msg.get("message_id")])
 						guid = msg.get("author_object_guid")
 						user = bot.getUserInfo(guid)["data"]["user"]["username"]
