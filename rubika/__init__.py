@@ -252,6 +252,25 @@ class Bot:
 					}
 			}))}, url="https://messengerg2c24.iranlms.ir/").json()["data_enc"]))
 
+	def getChannelInfo(self, chat_id):
+		return loads(self.enc.decrypt(post(
+			json={
+				"api_version":"5",
+				"auth": self.auth,
+				"data_enc": self.enc.encrypt(dumps({
+					"method":"getChannelInfo",
+					"input":{
+						"channel_guid": chat_id,
+					},
+					"client":{
+						"app_name":"Main",
+						"app_version":"3.2.1",
+						"platform":"Web",
+						"package":"web.rubika.ir",
+						"lang_code":"fa"
+					}
+			}))}, url="https://messengerg2c24.iranlms.ir/").json()["data_enc"]))
+
 	def setGroupTimer(self, chat_id, time):
 		return post(json={
 			"api_version": "4",
@@ -271,22 +290,6 @@ class Bot:
 			"method": "editGroupInfo"
 		}, url="https://messengerg2c64.iranlms.ir/")
 
-	def getGroupAllMembers(self, chat_id):
-		return loads(self.enc.decrypt(post(json={"api_version":"5","auth":self.auth,"data_enc":self.enc.encrypt(dumps({
-			"method":"getGroupAllMembers",
-			"input":{
-				"group_guid":chat_id,
-			},
-			"client":{
-				"app_name":"Main",
-				"app_version":"3.2.1",
-				"platform":"Web",
-				"package":"web.rubika.ir",
-				"lang_code":"fa"
-			}
-			}
-		))},url="https://messengerg2c73.iranlms.ir/").json().get("data_enc")))
-
 	def groupPreviewByJoinLink(self, chat_id):
 		return loads(self.enc.decrypt(post(json={"api_version":"5","auth":self.auth,"data_enc":self.enc.encrypt(dumps({
 			"method":"groupPreviewByJoinLink",
@@ -302,3 +305,105 @@ class Bot:
 			}
 			}
 			))},url="https://messengerg2c65.iranlms.ir/").json().get("data_enc")))
+	
+	def getChatsUpdates(self):
+		return loads(self.enc.decrypt(post(json={"api_version":"5","auth":self.auth,"data_enc":self.enc.encrypt(dumps({
+			"method":"getChatsUpdates",
+			"input":{
+				"state": str(int(time.time() - 100))
+			},
+			"client":{
+				"app_name":"Main",
+				"app_version":"3.2.1",
+				"platform":"Web",
+				"package":"web.rubika.ir",
+				"lang_code":"fa"
+			}}
+			))},url="https://messengerg2c5.iranlms.ir/").json().get("data_enc")))
+
+	def getGroupLink(self,chat_id):
+		return loads(self.enc.decrypt(post(json={"api_version":"5","auth":self.auth,"data_enc":self.enc.encrypt(dumps({
+			"method":"getGroupLink",
+			"input":{
+				"group_guid": chat_id
+			},
+			"client":{
+				"app_name":"Main",
+				"app_version":"3.2.1",
+				"platform":"Web",
+				"package":"web.rubika.ir",
+				"lang_code":"fa"
+			}}
+			))},url="https://messengerg2c3.iranlms.ir/").json().get("data_enc")))
+	
+	def setGroupFullAdmin(self, chat_id, user_id):
+		return loads(self.enc.decrypt(post(json={"api_version":"5","auth": self.auth,"data_enc":self.enc.encrypt(dumps({
+			"client":{
+				"app_name":"Main",
+				"app_version":"2.8.1",
+				"lang_code":"fa",
+				"package":"ir.resaneh1.iptv",
+				"platform":"Android"
+			},
+			"input":{
+				"group_guid":chat_id,
+				"access_list":["PinMessages","SetAdmin","ChangeInfo","BanMember","SetJoinLink","SetMemberAccess","DeleteGlobalAllMessages"],
+				"action":"setAdmin",
+				"member_guid":user_id,
+			},
+			"method":"setGroupAdmin"
+		}))},url="https://messengerg2c22.iranlms.ir/").json().get("data_enc")))
+
+	def setGroupAdmin(self, chat_id, user_id):
+		return loads(self.enc.decrypt(post(json={"api_version":"5","auth": self.auth,"data_enc":self.enc.encrypt(dumps({
+			"client":{
+				"app_name":"Main",
+				"app_version":"2.8.1",
+				"lang_code":"fa",
+				"package":"ir.resaneh1.iptv",
+				"platform":"Android"
+			},
+			"input":{
+				"group_guid":chat_id,
+				"access_list":["PinMessages","SetAdmin","BanMember","SetMemberAccess","DeleteGlobalAllMessages"],
+				"action":"SetAdmin",
+				"member_guid":user_id,
+			},
+			"method":"setGroupAdmin"
+		}))},url="https://messengerg2c22.iranlms.ir/").json().get("data_enc")))
+
+	def deleteGroupAdmin(self, chat_id, user_id):
+		return loads(self.enc.decrypt(post(json={"api_version":"5","auth": self.auth,"data_enc":self.enc.encrypt(dumps({
+			"client":{
+				"app_name":"Main",
+				"app_version":"2.8.1",
+				"lang_code":"fa",
+				"package":"ir.resaneh1.iptv",
+				"platform":"Android"
+			},
+			"input":{
+				"group_guid":chat_id,
+				"access_list":["PinMessages","SetAdmin","BanMember","SetMemberAccess","DeleteGlobalAllMessages"],
+				"action":"UnsetAdmin",
+				"member_guid":user_id,
+			},
+			"method":"setGroupAdmin"
+		}))},url="https://messengerg2c22.iranlms.ir/").json().get("data_enc")))
+
+	def getGroupAllMembers(self, text, group_guid):
+		return loads(self.enc.decrypt(post(json={
+			"api_version": "4",
+			"auth": self.auth,
+			"client": {
+				"app_name": "Main",
+				"app_version": "2.9.5",
+				"lang_code": "fa",
+				"package": "ir.resaneh1.iptv",
+				"platform": "Android"
+			},
+			"data_enc": self.enc.encrypt(dumps({
+				"group_guid":group_guid,
+				"search_text":text
+			})),
+			"method": "getGroupAllMembers"
+		}, url="https://messengerg2c63.iranlms.ir").json().get("data_enc")))
