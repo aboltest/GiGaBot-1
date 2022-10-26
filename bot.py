@@ -27,7 +27,7 @@ def searchUserInGroup(guid):
 		return True
 	
 	
-
+.
 # static variable
 answered, sleeped, retries = [], False, {}
 
